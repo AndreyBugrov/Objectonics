@@ -1,3 +1,5 @@
+#pragma once
+#include "exc_class.h"
 class Rational
 {
 private:
@@ -20,6 +22,29 @@ private:
 			}
 			return min_tmp;
 		}
+	}
+	unsigned NOK(int& one, int& two) //////////////////////////////////
+	{
+		bool neg_one = false, neg_two = false;
+		if (one < 0) {
+			one *= -1;
+			neg_one = true;
+		}
+		if (two < 0) {
+			two *= -1;
+			neg_two = true;
+		}
+		unsigned nod;
+		if (one > two) {
+			nod = NOD(two, one);
+		}
+		else {
+			nod = NOD(one, two);
+		}
+		int unic_one = one / nod, unic_two = two / nod;
+		int nok = unic_one * unic_two * nod;
+		one *= unic_two;
+		two *= unic_one;
 	}
 	void to_common_den(int& _num, const unsigned& _den)
 	{
@@ -83,14 +108,24 @@ public:
 			reduction();
 		}
 	}
-	Rational& operator*(const int& k);
-	Rational& operator/(const int& k);
-	Rational out() const
+	Rational& operator*(int k) 
 	{
-		return *this;
+		num *= k;
+		reduction();
 	}
-	Rational(int a = 0, unsigned b = 1) /////dividing by zero ?
+	Rational& operator/(int k)
 	{
+		if (k < 0) {
+			num *= -1;
+			k *= -1;
+		}
+		den *= k;
+		reduction();
+	}
+	Rational(int a = 0, unsigned b = 1)
+	{
+		if (b == 0)
+			throw Exc_class(Exc_class::DIVIDING_BY_ZERO_IN_RATIONAL);
 		num = a;
 		den = b;
 		reduction();
@@ -99,5 +134,18 @@ public:
 	{
 		num = r.num;
 		den = r.den;
+	}
+	int round()
+	{
+		if (num >= 0)
+		{
+			return num / den;
+		}
+		if ((-num) < den)
+		{
+			return -1;
+		}
+		long long tmp = long long(num) / long long(den);
+		return int(tmp);
 	}
 };

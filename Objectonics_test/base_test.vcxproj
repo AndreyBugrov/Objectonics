@@ -85,6 +85,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="test_main.cpp" />
+    <ClCompile Include="test_rational.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Objectonics\rational.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

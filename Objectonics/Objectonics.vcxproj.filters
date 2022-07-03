@@ -18,5 +18,8 @@
     <ClInclude Include="rational.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="exc_class.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
